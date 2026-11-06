@@ -1,0 +1,52 @@
+name: Vigía
+
+on:
+  schedule:
+    # Cada 10 minutos, evitando el minuto 0, que es cuando GitHub va más cargado.
+    - cron: "3,13,23,33,43,53 * * * *"
+  workflow_dispatch:
+    inputs:
+      simular:
+        description: "Simular una caída para probar el aviso"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: vigia
+  cancel-in-progress: false
+
+jobs:
+  vigilar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Pruebas
+        if: github.event_name != 'schedule'
+        run: node --test
+
+      - name: Comprobar las webs
+        run: node vigia.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SIMULAR: ${{ inputs.simular }}
+
+      # Guardar el estado también evita que GitHub apague el cron por inactividad.
+      - name: Guardar el estado
+        run: |
+          git add estado.json
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "estado: $(date -u +%FT%RZ)"
+          git push

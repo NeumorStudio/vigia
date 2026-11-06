@@ -1,0 +1,54 @@
+{
+  "responsables": ["EdwinJordanHerbas", "cmate0s"],
+  "sitios": [
+    {
+      "nombre": "Salonio",
+      "url": "https://reservas.neumorstudio.com",
+      "contiene": "Salonio",
+      "desdeEspana": true
+    },
+    {
+      "nombre": "Paye Villalobos",
+      "url": "https://payevillalobos.neumorstudio.com",
+      "contiene": "Paye Villalobos"
+    },
+    {
+      "nombre": "LIDIAUTO",
+      "url": "https://lidiauto.es",
+      "contiene": "Santiponce"
+    },
+    {
+      "nombre": "H&R Car",
+      "url": "https://hrcar.es",
+      "contiene": "Albacete",
+      "desdeEspana": true
+    },
+    {
+      "nombre": "González-Regalado",
+      "url": "https://regaladogourmet.com",
+      "contiene": "Regalado"
+    },
+    {
+      "nombre": "Rincón de Tina",
+      "url": "https://rincondetina.es",
+      "contiene": "Rincón de Tina"
+    },
+    {
+      "nombre": "TINA Fusión",
+      "url": "https://cafeteria.tinafusion.com",
+      "contiene": "TINA"
+    },
+    {
+      "nombre": "NeumorStudio",
+      "url": "https://www.neumorstudio.com",
+      "contiene": "NeumorStudio"
+    },
+    {
+      "nombre": "Supabase",
+      "urlDesdeVariable": "SUPABASE_URL",
+      "tipo": "senal",
+      "cualquierRespuesta": true,
+      "desdeEspana": true
+    }
+  ]
+}
